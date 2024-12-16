@@ -13,17 +13,25 @@ export function SignupForm() {
 		>
 			<Label htmlFor="name">Name</Label>
 			<Input id="name" name="name" placeholder="Name" />
-			{state?.errors?.name && <p>{state.errors.name}</p>}
+			{state?.errors?.name && (
+				<p className={"col-start-1 col-end-3 -mt-2 text-orange-500 font-bold"}>
+					{state.errors.name}
+				</p>
+			)}
 
 			<Label htmlFor="email">Email</Label>
 			<Input id="email" name="email" type="email" placeholder="Email" />
-			{state?.errors?.email && <p>{state.errors.email}</p>}
+			{state?.errors?.email && (
+				<p className={"col-start-1 col-end-3 -mt-2 text-orange-500 font-bold"}>
+					{state.errors.email}
+				</p>
+			)}
 
 			<Label htmlFor="password">Password</Label>
 			<Input id="password" name="password" type="password" />
 			{state?.errors?.password && (
-				<div>
-					<p>Password must:</p>
+				<div className={"col-start-1 col-end-3 -mt-2 text-orange-500"}>
+					<p className={"font-bold"}>Password must:</p>
 					<ul>
 						{state.errors.password.map((error) => (
 							<li key={error}>- {error}</li>
