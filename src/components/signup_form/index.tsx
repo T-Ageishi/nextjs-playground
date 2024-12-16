@@ -1,7 +1,7 @@
 "use client";
 
 import { signup } from "@/lib/actions/auth";
-import { useActionState } from "react";
+import { ComponentProps, ReactNode, useActionState } from "react";
 
 export function SignupForm() {
 	const [state, action, pending] = useActionState(signup, undefined);
@@ -9,34 +9,18 @@ export function SignupForm() {
 	return (
 		<form
 			action={action}
-			className={"grid gap-y-2 grid-cols-[150px_1fr] w-64 mx-auto"}
+			className={"grid gap-y-4 grid-cols-[max-content_1fr] w-64 mx-auto"}
 		>
-			<label htmlFor="name">Name</label>
-			<input
-				id="name"
-				name="name"
-				placeholder="Name"
-				className={"border border-gray-200 p-1 rounded"}
-			/>
+			<Label htmlFor="name">Name</Label>
+			<Input id="name" name="name" placeholder="Name" />
 			{state?.errors?.name && <p>{state.errors.name}</p>}
 
-			<label htmlFor="email">Email</label>
-			<input
-				id="email"
-				name="email"
-				type="email"
-				placeholder="Email"
-				className={"border border-gray-200 p-1 rounded"}
-			/>
+			<Label htmlFor="email">Email</Label>
+			<Input id="email" name="email" type="email" placeholder="Email" />
 			{state?.errors?.email && <p>{state.errors.email}</p>}
 
-			<label htmlFor="password">Password</label>
-			<input
-				id="password"
-				name="password"
-				type="password"
-				className={"border border-gray-200 p-1 rounded"}
-			/>
+			<Label htmlFor="password">Password</Label>
+			<Input id="password" name="password" type="password" />
 			{state?.errors?.password && (
 				<div>
 					<p>Password must:</p>
@@ -65,4 +49,19 @@ export function SignupForm() {
 			</div>
 		</form>
 	);
+}
+
+function Label({
+	children,
+	...props
+}: ComponentProps<"label"> & { children: ReactNode }) {
+	return (
+		<label {...props} className={"pr-4"}>
+			{children}
+		</label>
+	);
+}
+
+function Input(props: ComponentProps<"input">) {
+	return <input {...props} className={"border border-gray-200 p-1 rounded"} />;
 }
