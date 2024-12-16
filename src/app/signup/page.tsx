@@ -1,5 +1,9 @@
 import { SignupForm } from "@/components/signup_form";
 
 export default function SignupPage() {
-	return <SignupForm />;
+	return (
+		<main className={"p-8"}>
+			<SignupForm />
+		</main>
+	);
 }
